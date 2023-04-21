@@ -20,6 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+from typing import List
+
 import numpy as np
 import torch
 
@@ -126,3 +128,29 @@ class TorchOperator(Operator):
         gradients = torch.autograd.grad(outputs, inputs)
         inputs.requires_grad_(False)
         return gradients[0]
+
+    stack = torch.stack
+    add = torch.add
+    cat = torch.cat
+    mean = torch.mean
+
+    def flatten(self, tens: torch.Tensor):
+        # Flatten the features to 2D (n_batch, n_features)
+        return tens.view(tens.size(0), -1)
+
+    def from_numpy(self, arr: np.ndarray):
+        # Convert numpy array to torch tensor
+        # TODO change dtype
+        return torch.from_numpy(arr).double()
+
+    def constant(self, tens: torch.Tensor):
+        return torch.autograd.Variable(tens)
+
+    def transpose(self, tens: torch.Tensor):
+        return tens.t()
+
+    def diag(self, tens: torch.Tensor):
+        return tens.diag()
+
+    def reshape(self, tens: torch.Tensor, new_shape: List[int]):
+        return tens.view(*new_shape)

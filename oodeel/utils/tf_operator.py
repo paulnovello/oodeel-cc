@@ -125,11 +125,6 @@ class TFOperator(Operator):
         return tf.stack(tensors, dim)
 
     @staticmethod
-    def add(x: TensorType, y: TensorType) -> TensorType:
-        "Add two tensors"
-        return tf.add(x, y)
-
-    @staticmethod
     def cat(tensors: List[TensorType], dim: int = 0) -> TensorType:
         "Concatenate tensors in a given dimension"
         return tf.concat(tensors, dim)
@@ -165,3 +160,8 @@ class TFOperator(Operator):
     def reshape(tensor: TensorType, shape: List[int]) -> TensorType:
         "Reshape function"
         return tf.reshape(tensor, shape)
+
+    @staticmethod
+    def pinv(tensor: TensorType) -> TensorType:
+        "Pseudo-inverse function"
+        return tf.linalg.pinv(tensor)

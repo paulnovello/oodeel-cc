@@ -135,11 +135,6 @@ class TorchOperator(Operator):
         return torch.stack(tensors, dim)
 
     @staticmethod
-    def add(x: TensorType, y: TensorType) -> TensorType:
-        "Add two tensors"
-        return torch.add(x, y)
-
-    @staticmethod
     def cat(tensors: List[TensorType], dim: int = 0) -> TensorType:
         "Concatenate tensors in a given dimension"
         return torch.cat(tensors, dim)
@@ -172,3 +167,8 @@ class TorchOperator(Operator):
     @staticmethod
     def reshape(tensor: TensorType, shape: List[int]) -> TensorType:
         return tensor.view(*shape)
+
+    @staticmethod
+    def pinv(tensor: TensorType) -> TensorType:
+        "Pseudo-inverse function"
+        return torch.linalg.pinv(tensor)

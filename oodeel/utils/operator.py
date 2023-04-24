@@ -64,6 +64,16 @@ class Operator(ABC):
         raise NotImplementedError()
 
     @abstractmethod
+    def norm(tensor: TensorType, dim: int = None) -> TensorType:
+        """Norm function"""
+        raise NotImplementedError()
+
+    @abstractmethod
+    def matmul(tensor_1: TensorType, tensor_2: TensorType) -> TensorType:
+        """Matmul operation"""
+        raise NotImplementedError()
+
+    @abstractmethod
     def convert_to_numpy(tensor: TensorType) -> np.ndarray:
         "Convert a tensor to a NumPy array"
         raise NotImplementedError()
@@ -85,11 +95,6 @@ class Operator(ABC):
     @abstractmethod
     def stack(tensors: List[TensorType], dim: int = 0) -> TensorType:
         "Stack tensors along a new dimension"
-        raise NotImplementedError()
-
-    @abstractmethod
-    def add(x: TensorType, y: TensorType) -> TensorType:
-        "Add two tensors"
         raise NotImplementedError()
 
     @abstractmethod
@@ -127,4 +132,9 @@ class Operator(ABC):
     @abstractmethod
     def reshape(tensor: TensorType, shape: List[int]) -> TensorType:
         "Reshape function"
+        raise NotImplementedError()
+
+    @abstractmethod
+    def pinv(tensor: TensorType) -> TensorType:
+        "Pseudo-inverse function"
         raise NotImplementedError()

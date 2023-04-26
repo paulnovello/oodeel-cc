@@ -117,7 +117,6 @@ if __name__ == "__main__":
     oodmodel = Mahalanobis(output_layers_id=["avgpool"], input_processing_magnitude=0.0)
     oodmodel.fit(model, ds_fit_pt)
     for mag in [0.01, 0.005, 0.002, 0.0014, 0.001, 0.0005]:
-
         print(f"Magnitude : {mag}")
 
         oodmodel.input_processing_magnitude = mag

@@ -696,7 +696,9 @@ class TorchDataHandler(DataHandler):
         return tuple(dataset[0][feature_key].shape)
 
     @staticmethod
-    def get_input_from_dataset_item(elem: Union[torch.Tensor, tuple, dict]) -> Any:
+    def get_input_from_dataset_item(
+        elem: Union[torch.Tensor, tuple, dict], with_labels=False
+    ) -> Any:
         """Get the tensor that is to be feed as input to a model from a dataset element.
 
         Args:
@@ -705,7 +707,11 @@ class TorchDataHandler(DataHandler):
         Returns:
             Any: Input tensor
         """
-        if isinstance(elem, (tuple, list)):
+        if isinstance(elem, (tuple, list)) and with_labels:
+            tensor = (elem[0], elem[1])
+        elif isinstance(elem, dict) and with_labels:
+            tensor = (elem[list(elem.keys())[0]], elem["label"])
+        elif isinstance(elem, (tuple, list)):
             tensor = elem[0]
         elif isinstance(elem, dict):
             tensor = elem[list(elem.keys())[0]]

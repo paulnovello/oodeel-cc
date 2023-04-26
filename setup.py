@@ -87,7 +87,7 @@ docs_requirements = [
 
 setup(
     # Name of the package:
-    name="oodeel",
+    name="oodeel_cc",
     # Version of the package:
     version="0.0.1",
     # Find the package automatically (include everything):
